@@ -1,0 +1,20 @@
+### Next part of the file is managed by a different template ###
+## Module:           '<%= scope.to_hash['module_name'] %>'
+<% module_paths =  Puppet::Node::Environment.current[:modulepath].split(':').map{|i| File.expand_path(i) }.join("|") -%>
+## Template source:  'MODULES<%= template_source.gsub(Regexp.new("^#{module_paths}"),"") %>'
+
+[master]
+    autosign       = $confdir/autosign.conf { mode = 664 }
+    reports        = foreman
+    external_nodes = /etc/puppet/node.rb
+    node_terminus  = exec
+    ca             = <%= scope.lookupvar("puppet::server::ca") %>
+<% if scope.lookupvar("puppet::server::git_repo") -%>
+    manifest       = <%= scope.lookupvar("puppet::server::envs_dir") %>/$environment/manifests/site.pp
+    modulepath     = <%= scope.lookupvar("puppet::server::envs_dir") %>/$environment/modules
+<% else -%>
+<% scope.lookupvar("puppet::server::environments").each do |env| -%>
+[<%= env %>]
+    modulepath     = <%= scope.lookupvar("puppet::server::modules_path") %>/<%= env %>:<%= [scope.lookupvar("puppet::server::common_modules_path")].flatten.join(":") %>
+<% end -%>
+<% end -%>

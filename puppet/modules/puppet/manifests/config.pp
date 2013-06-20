@@ -9,6 +9,10 @@ class puppet::config {
     content => '*',
   }
 
+  file {"${puppet::dir}/hiera.yaml":
+    ensure => present,
+  }
+
   file { "${puppet::dir}/puppet.conf":
     content => template($puppet::agent_template),
   }

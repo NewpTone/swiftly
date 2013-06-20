@@ -5,9 +5,10 @@
 
 [master]
     autosign       = $confdir/autosign.conf { mode = 664 }
-    reports        = foreman
+    reports        = log,foreman
     external_nodes = /etc/puppet/node.rb
-    node_terminus  = exec
+    node_terminus  = <%= scope.lookupvar("puppet::server::node_terminus") %>
+    storeconfigs   = true
     ca             = <%= scope.lookupvar("puppet::server::ca") %>
 <% if scope.lookupvar("puppet::server::git_repo") -%>
     manifest       = <%= scope.lookupvar("puppet::server::envs_dir") %>/$environment/manifests/site.pp

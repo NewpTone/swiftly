@@ -14,6 +14,10 @@ class puppet::params {
   $port                = 8140
   $listen              = false
 
+  # Use foreman or not
+  $use_foreman     = false
+  $node_terminus   = 'plain'
+
   # Need your own config templates? Specify here:
   $agent_template  = 'puppet/puppet.conf.erb'
   $master_template = 'puppet/server/puppet.conf.erb'

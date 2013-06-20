@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 class puppetdb::params {
-  $listen_address            = 'localhost'
+  $listen_address            = '0.0.0.0'
   $listen_port               = '8080'
   $open_listen_port          = false
   $ssl_listen_address        = $::fqdn

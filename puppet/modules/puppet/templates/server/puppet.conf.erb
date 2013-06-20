@@ -8,6 +8,7 @@
     reports        = puppetdb,foreman
     external_nodes = /etc/puppet/node.rb
     node_terminus  = <%= scope.lookupvar("puppet::server::node_terminus") %>
+    storeconfigs_backend = puppetdb
     storeconfigs   = true
     ca             = <%= scope.lookupvar("puppet::server::ca") %>
 <% if scope.lookupvar("puppet::server::git_repo") -%>

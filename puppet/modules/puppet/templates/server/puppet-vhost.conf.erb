@@ -7,8 +7,8 @@ Listen <%= scope.lookupvar("puppet::server::port") %>
 	SSLProtocol -ALL +SSLv3 +TLSv1
 	SSLCipherSuite ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP
 
-	SSLCertificateFile      <%= scope.lookupvar("puppet::server::ssl_dir") %>/certs/<%= fqdn %>.pem
-	SSLCertificateKeyFile   <%= scope.lookupvar("puppet::server::ssl_dir") %>/private_keys/<%= fqdn %>.pem
+	SSLCertificateFile      <%= scope.lookupvar("puppet::server::ssl_dir") %>/certs/<%= @fqdn %>.pem
+	SSLCertificateKeyFile   <%= scope.lookupvar("puppet::server::ssl_dir") %>/private_keys/<%= @fqdn %>.pem
 <% unless scope.lookupvar("puppet::server::ca") %>
 	SSLCACertificateFile    <%= scope.lookupvar("puppet::server::ssl_dir") %>/certs/ca.pem
 <% else -%>
